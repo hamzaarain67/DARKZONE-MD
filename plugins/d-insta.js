@@ -4,7 +4,7 @@ const { cmd } = require("../command");
 // Instagram Downloader 
 cmd({
   pattern: "ig",
-  alias: ["instagram5", "ig", "instadl5"],
+  alias: ["instagram", "ig", "insta"],
   react: '📩',
   desc: "Download videos from Instagram (API v5)",
   category: "download",
