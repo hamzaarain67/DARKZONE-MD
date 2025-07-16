@@ -1,10 +1,5 @@
-<div align="center">
 
-<!-- Glowing Animated Header -->
-[![Typing Animation](https://readme-typing-svg.demolab.com?font=Righteous&size=36&weight=800&duration=3000&pause=800&color=F8D866&background=8B00FF30&center=true&vCenter=true&width=700&height=100&lines=✨+ASSALAMUALAIKUM!+WELCOME+TO+DARKZONE-MD;🌟+ULTRA-ADVANCED+WHATSAPP+BOT+WITH+150%2B+FEATURES;🚀+LIGHTNING+FAST+•+AI-POWERED+•+EASY+TO+USE)](https://git.io/typing-svg)
 
-<!-- Animated Sparkle Divider -->
-<img src="https://i.giphy.com/media/XcQ0XH32ya0Gs3QNwk/giphy.webp" width="450" alt="sparkle-divider">
 
 <!-- Glowing CTA Button -->
 <a href="https://github.com/DARKZONE-MD/DARKZONE-MD">
@@ -13,9 +8,6 @@
 
 </div>
 ```
-DONT FORGET TO FORK 🍴 & STAR 🌟 REPO😇
-```
-
 ---
 
 > **CURRENT BOT VERSION ➜ `4.5.0 ⚡`**
