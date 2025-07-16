@@ -116,10 +116,10 @@ DONT FORGET TO FORK 🍴 & STAR 🌟 REPO😇
 
 | Category       | Features                                                                 |
 |----------------|--------------------------------------------------------------------------|
-| <span style="color:#f8f8f2">**Core**</span>           | <span style="color:#e6e6e6">Multi-Device Support</span> • <span style="color:#e6e6e6">Anti-Delete</span> • <span style="color:#e6e6e6">AI Chatbot</span>                          |
-| <span style="color:#f8f8f2">**Media**</span>          | <span style="color:#e6e6e6">YouTube Downloader</span> • <span style="color:#e6e6e6">Instagram/TikTok Downloader</span> • <span style="color:#e6e6e6">Sticker Maker</span>         |
-| <span style="color:#f8f8f2">**Group Tools**</span>    | <span style="color:#e6e6e6">Moderation</span> • <span style="color:#e6e6e6">Auto-Sticker</span> • <span style="color:#e6e6e6">Games</span> • <span style="color:#e6e6e6">Admin Commands (Ban/Kick/Promote)</span>    |
-| <span style="color:#f8f8f2">**Utilities**</span>      | <span style="color:#e6e6e6">Web Pairing</span> • <span style="color:#e6e6e6">QR Code Login</span> • <span style="color:#e6e6e6">Broadcast Messages</span> • <span style="color:#e6e6e6">More!</span>                 |
+| **Core**       | ![•](https://tinyurl.com/white-dot) Multi-Device ![•](https://tinyurl.com/white-dot) Anti-Delete ![•](https://tinyurl.com/white-dot) AI Chatbot |
+| **Media**      | ![•](https://tinyurl.com/white-dot) YouTube ![•](https://tinyurl.com/white-dot) Instagram/TikTok ![•](https://tinyurl.com/white-dot) Sticker Maker |
+| **Group**      | ![•](https://tinyurl.com/white-dot) Moderation ![•](https://tinyurl.com/white-dot) Auto-Sticker ![•](https://tinyurl.com/white-dot) Admin Tools |
+| **Utilities**  | ![•](https://tinyurl.com/white-dot) Web Pairing ![•](https://tinyurl.com/white-dot) QR Login ![•](https://tinyurl.com/white-dot) Broadcast |
 
 </div>
 ---
