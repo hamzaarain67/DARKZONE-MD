@@ -155,13 +155,14 @@
 ```diff
 - WARNING: This is NOT an official WhatsApp product
 - Using third-party bots may violate WhatsApp's Terms of Service
-- Use at your own risk - Account bans are possible
+- Use at your own risk - Account bans are possible.
 
 ---
-
+---
 
 <div align="center" style="margin-top:20px">
 Project Maintainer
 https://readme-typing-svg.demolab.com?font=Roboto&size=20&weight=500&pause=1000&color=3498DB&center=true&vCenter=true&width=400&lines=Erfan+Ahmad;Contact:+923306137477
 
-</div> ```
+</div>
+ ```
