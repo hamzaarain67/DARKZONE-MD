@@ -111,15 +111,14 @@ DONT FORGET TO FORK 🍴 & STAR 🌟 REPO😇
 ---
 
 ## ✨ Key Features
-
 <div align="center">
 
 | Category       | Features                                                                 |
 |----------------|--------------------------------------------------------------------------|
-| **Core**       | ![•](https://tinyurl.com/white-dot) Multi-Device ![•](https://tinyurl.com/white-dot) Anti-Delete ![•](https://tinyurl.com/white-dot) AI Chatbot |
-| **Media**      | ![•](https://tinyurl.com/white-dot) YouTube ![•](https://tinyurl.com/white-dot) Instagram/TikTok ![•](https://tinyurl.com/white-dot) Sticker Maker |
-| **Group**      | ![•](https://tinyurl.com/white-dot) Moderation ![•](https://tinyurl.com/white-dot) Auto-Sticker ![•](https://tinyurl.com/white-dot) Admin Tools |
-| **Utilities**  | ![•](https://tinyurl.com/white-dot) Web Pairing ![•](https://tinyurl.com/white-dot) QR Login ![•](https://tinyurl.com/white-dot) Broadcast |
+| **`🌐 Core`**       | `📱` Multi-Device Support • `↩️` Anti-Delete • `🤖` AI Chatbot                          |
+| **`🎨 Media`**      | `▶️` YouTube Downloader • `📸` Instagram/TikTok DL • `🖼️` Sticker Maker         |
+| **`👥 Group`**      | `🛡️` Moderation • `✨` Auto-Sticker • `🎮` Games • `👮` Admin Tools    |
+| **`⚙️ Utilities`**  | `🌐` Web Pairing • `🔑` QR Login • `📢` Broadcast • `➕` More!                 |
 
 </div>
 ---
