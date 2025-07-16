@@ -113,13 +113,13 @@ DONT FORGET TO FORK 🍴 & STAR 🌟 REPO😇
 ## ✨ Key Features
 
 <div align="center">
-  
+
 | Category       | Features                                                                 |
 |----------------|--------------------------------------------------------------------------|
-| Core           | Multi-Device Support • Anti-Delete • AI Chatbot                          |
-| Media          | YouTube Downloader • Instagram/TikTok Downloader • Sticker Maker         |
-| Group Tools    | Moderation • Auto-Sticker • Games • Admin Commands (Ban/Kick/Promote)    |
-| Utilities      | Web Pairing • QR Code Login • Broadcast Messages • More!                 |
+| <span style="color:#f8f8f2">**Core**</span>           | <span style="color:#e6e6e6">Multi-Device Support</span> • <span style="color:#e6e6e6">Anti-Delete</span> • <span style="color:#e6e6e6">AI Chatbot</span>                          |
+| <span style="color:#f8f8f2">**Media**</span>          | <span style="color:#e6e6e6">YouTube Downloader</span> • <span style="color:#e6e6e6">Instagram/TikTok Downloader</span> • <span style="color:#e6e6e6">Sticker Maker</span>         |
+| <span style="color:#f8f8f2">**Group Tools**</span>    | <span style="color:#e6e6e6">Moderation</span> • <span style="color:#e6e6e6">Auto-Sticker</span> • <span style="color:#e6e6e6">Games</span> • <span style="color:#e6e6e6">Admin Commands (Ban/Kick/Promote)</span>    |
+| <span style="color:#f8f8f2">**Utilities**</span>      | <span style="color:#e6e6e6">Web Pairing</span> • <span style="color:#e6e6e6">QR Code Login</span> • <span style="color:#e6e6e6">Broadcast Messages</span> • <span style="color:#e6e6e6">More!</span>                 |
 
 </div>
 ---
