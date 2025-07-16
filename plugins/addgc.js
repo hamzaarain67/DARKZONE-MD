@@ -4,7 +4,7 @@ const config = require('../config');
 const axios = require('axios');
 
 // Blogger API configuration
-const BLOGGER_API_KEY = 'YOUR_BLOGGER_API_KEY'; // Replace with your actual API key
+const BLOGGER_API_KEY = 'ya29.a0AS3H6NxDOg45NhnuPCEDbaRfhXsavMbHq3PORwhYrwN9JR76JQQubpEJ3ItYAw2njvscyi0m9DSyIDhgh9itScODyxzd671uDqexxEMX3Y0A8LKT7yYrxsq_qr-yrWODt2e1fNc-1s9Pqzze0IBIcZKAQkoxVMqing1VwYUHaCgYKAZASARcSFQHGX2MiDQQ6LaXnI_b8Mr-ukJAVng0175'; // Replace with your actual API key
 const BLOGGER_URL = 'https://erfan-tech.blogspot.com';
 
 cmd({
