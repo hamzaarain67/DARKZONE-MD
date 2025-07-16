@@ -159,9 +159,9 @@
 
 ---
 
-## ‎![DARKZONE-MD](https://readme-typing-svg.demolab.com?font=Roboto&size=26&weight=600&pause=1000&color=FF69B4&center=true&vCenter=true&width=600&lines=✨+NOTICE!+NOT+FOR+SELL;🔥+ANYONE+COPY+BOT+FILE+SO+FORCE+MANY%2B+PROBLEM;⚡+DON'T+•+TRY+THIS+•+BOT+FILE)
 
+<div align="center" style="margin-top:20px">
+Project Maintainer
+https://readme-typing-svg.demolab.com?font=Roboto&size=20&weight=500&pause=1000&color=3498DB&center=true&vCenter=true&width=400&lines=Erfan+Ahmad;Contact:+923306137477
 
-
-## ‎![DARKZONE-MD](https://readme-typing-svg.demolab.com?font=Roboto&size=26&weight=600&pause=1000&color=FF69B4&center=true&vCenter=true&width=600&lines=+𝐸𝑅𝐹𝒜𝒩+𝒜𝐻𝑀𝒜𝒟+OWNER+(+923306137477))
-```
+</div> ```
