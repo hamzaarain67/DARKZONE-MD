@@ -1,5 +1,11 @@
 
+<div align="center">
+  
+<h2 style="color:#3498DB">DARKZONE-MD WHATSAPP BOT</h2>
+<h3 style="color:#3498DB">THE MOST ADVANCED MD BOT</h3>
+<h4 style="color:#3498DB">WITH 100+ FEATURES</h4>
 
+</div>
 
 <!-- Glowing CTA Button -->
 <a href="https://github.com/DARKZONE-MD/DARKZONE-MD">
