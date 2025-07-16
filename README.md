@@ -146,29 +146,31 @@
 
 ---
 ***
-## ⚠️ IMPORTANT NOTICE
 
 <div align="center">
 
-### 🚨 DISCLAIMER
+<!-- Animated Sparkle Divider -->
+<img src="https://i.giphy.com/media/XcQ0XH32ya0Gs3QNwk/giphy.webp" width="450" alt="sparkle-divider">
 
-<span style="color:#3498DB;font-weight:bold">• NOT an official WhatsApp product</span>  
-<span style="color:#3498DB">• May violate WhatsApp's Terms of Service</span>  
-<span style="color:#3498DB">• Use at your own risk - Bans possible</span>  
-<span style="color:#3498DB">• Not affiliated with Meta/WhatsApp Inc.</span>
+<!-- Enhanced Glowing CTA Button -->
+<a href="https://github.com/DARKZONE-MD/DARKZONE-MD/fork">
+  <img src="https://readme-typing-svg.demolab.com?font=Comfortaa&size=22&duration=2000&pause=500&color=FF9D00&background=1A1A1A&center=true&vCenter=true&width=550&repeat=true&lines=%E2%9A%A0%EF%B8%8F++FORK++%F0%9F%8D%B4++%26++STAR++%F0%9F%8C%9F++TO++SUPPORT++%E2%9A%A0%EF%B8%8F;%F0%9F%94%A5++HELP++GROW++THE++PROJECT++%F0%9F%94%A5" alt="CTA">
+</a>
 
----
+<!-- New Feature Badges -->
+<div style="margin-top:25px">
 
-### 📜 USAGE WARNINGS
-<span style="color:#2980b9">🚫 Not for commercial use</span>  
-<span style="color:#2980b9">🔒 Unauthorized copying prohibited</span>  
-<span style="color:#2980b9">⚖️ Owner not responsible for misuse</span>
-
----
-
-### 👨💻 PROJECT MAINTAINER
-<span style="color:#3498DB;font-size:18px">Erfan Ahmad</span>  
-<span style="color:#3498DB">Contact: +92 330 6137477</span>
+[![GitHub Forks](https://img.shields.io/badge/Dynamic/json?color=00FFAA&label=FORKS&query=forks_count&url=https://api.github.com/repos/DARKZONE-MD/DARKZONE-MD&style=for-the-badge&logo=github)](https://github.com/DARKZONE-MD/DARKZONE-MD/fork)
+[![GitHub Stars](https://img.shields.io/badge/Dynamic/json?color=00BFFF&label=STARS&query=stargazers_count&url=https://api.github.com/repos/DARKZONE-MD/DARKZONE-MD&style=for-the-badge&logo=github)](https://github.com/DARKZONE-MD/DARKZONE-MD)
+[![Active](https://img.shields.io/badge/STATUS-ACTIVE-00FF00?style=for-the-badge&logo=vercel)](https://github.com/DARKZONE-MD/DARKZONE-MD)
 
 </div>
 
+<!-- New Animated Contributors -->
+<div style="margin-top:20px">
+
+[![Contributors](https://readme-typing-svg.demolab.com?font=Fira+Code&size=16&duration=3000&pause=1000&color=58A6FF&background=00000000&center=true&vCenter=true&width=500&lines=THANKS+TO+ALL+CONTRIBUTORS+%F0%9F%99%8F;SPECIAL+THANKS+TO+OUR+STAR+SUPPORTERS+%E2%AD%90)](https://github.com/DARKZONE-MD/DARKZONE-MD/graphs/contributors)
+
+</div>
+
+</div>
