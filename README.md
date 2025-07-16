@@ -16,7 +16,7 @@
 ```
 ---
 
-> **CURRENT BOT VERSION ➜ `4.5.0 ⚡`**
+> **CURRENT BOT VERSION ➜ `4.6.1 ⚡`**
 ---
 
 
@@ -159,9 +159,9 @@
 
 <!-- New Feature Badges -->
 <div style="margin-top:25px">
-
-[![GitHub Forks](https://img.shields.io/badge/Dynamic/json?color=00FFAA&label=FORKS&query=forks_count&url=https://api.github.com/repos/DARKZONE-MD/DARKZONE-MD&style=for-the-badge&logo=github)](https://github.com/DARKZONE-MD/DARKZONE-MD/fork)
-[![GitHub Stars](https://img.shields.io/badge/Dynamic/json?color=00BFFF&label=STARS&query=stargazers_count&url=https://api.github.com/repos/DARKZONE-MD/DARKZONE-MD&style=for-the-badge&logo=github)](https://github.com/DARKZONE-MD/DARKZONE-MD)
+  
+[![GitHub Forks](https://img.shields.io/badge/FORKS-%3F-00FFAA?style=for-the-badge&logo=github&labelColor=1A1A1A)](https://github.com/DARKZONE-MD/DARKZONE-MD/fork)
+[![GitHub Stars](https://img.shields.io/badge/STARS-%3F-00BFFF?style=for-the-badge&logo=github&labelColor=1A1A1A)](https://github.com/DARKZONE-MD/DARKZONE-MD)
 [![Active](https://img.shields.io/badge/STATUS-ACTIVE-00FF00?style=for-the-badge&logo=vercel)](https://github.com/DARKZONE-MD/DARKZONE-MD)
 
 </div>
