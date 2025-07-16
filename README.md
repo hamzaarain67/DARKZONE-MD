@@ -104,15 +104,6 @@ DONT FORGET TO FORK 🍴 & STAR 🌟 REPO😇
 </table>  
 
 
-<table align="center">
-  <tr>
-    <td>
-      <a href="https://github.com/DARKZONE-MD/DARKZONE-MD/archive/refs/heads/main.zip" target="_blank">
-        <img alt="Panel Zip File" src="https://img.shields.io/badge/View-panel%20Codes-FF0000?style=for-the-badge&logo=bot&logoColor=white"/>
-      </a>
-    </td>
-  </tr>
-</table>  
 
 <hr>
 <p align="center"><i>✨ Keep your bot updated regularly to enjoy the latest features and patches.</i></p>
