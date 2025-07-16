@@ -147,12 +147,15 @@
 ---
 ***
 
-## <h2 align="left">⚠️ REMINDER </h2>
-<p style="text-align: center; font-size: 1.2em;">
 
-- **DISCLAIMER:**- REMEMBER IT If WhatsApp gets banned, I, Owner Erfan, will not be responsible for it.THIS BOT IS NOT AFFILIATED WITH `WhatsApp Inc.`. USE IT AT YOUR OWN RISK.
-- MISUSING THE BOT MAY RESULT IN YOUR `WhatsApp` ACCOUNT BEING BANNED. NOTE THAT YOU CAN ONLY UNBAN YOUR ACCOUNT ONCE.
-- I AM NOT RESPONSIBLE FOR ANY BANS OR MISUSE OF THE BOT. PLEASE KEEP THIS WARNING IN MIND BEFORE PROCEEDING.
+## ⚠️ IMPORTANT NOTICE
+
+<div align="center">
+
+```diff
+- WARNING: This is NOT an official WhatsApp product
+- Using third-party bots may violate WhatsApp's Terms of Service
+- Use at your own risk - Account bans are possible
 
 ---
 
