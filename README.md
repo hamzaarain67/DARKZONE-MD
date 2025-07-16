@@ -66,96 +66,76 @@ DONT FORGET TO FORK 🍴 & STAR 🌟 REPO😇
 
 ---
 
-### <h4 align="">1. HEROKU</h4>
-<p style="text-align: center; font-size: 1.2em;">
+<p align="center">Deploy your <strong>DARKZONE-MD Bot</strong> with one click on your favorite hosting platforms.</p>
+
+<div align="center">
+  <table>
+    <tr>
+      <td><a href="https://dashboard.heroku.com/new?template=https://github.com/DARKZONE-MD/DARKZONE-MD" target="_blank"><img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white&labelColor=000000&color=00ffff"/></a></td>
+      <td><a href="https://talkdrove.com" target="_blank"><img src="https://img.shields.io/badge/TalkDrove-6971FF?style=for-the-badge&logo=github&logoColor=white&labelColor=000000"/></a></td>
+    </tr>
+    <tr>
+      <td><a href="https://app.koyeb.com/services/deploy?type=git&repository=DARKZONE-MD/DARKZONE-MD" target="_blank"><img src="https://img.shields.io/badge/Koyeb-FF009D?style=for-the-badge&logo=koyeb&logoColor=white&labelColor=000000"/></a></td>
+      <td><a href="https://railway.app/new" target="_blank"><img src="https://img.shields.io/badge/Railway-FF8700?style=for-the-badge&logo=railway&logoColor=white&labelColor=000000"/></a></td>
+    </tr>
+    <tr>
+      <td><a href="https://dashboard.render.com/web/new" target="_blank"><img src="https://img.shields.io/badge/Render-000000?style=for-the-badge&logo=render&logoColor=white&labelColor=000000&color=00ffaa"/></a></td>
+      <td><a href="https://app.netlify.com/" target="_blank"><img src="https://img.shields.io/badge/Netlify-CC00FF?style=for-the-badge&logo=huggingface&logoColor=white&labelColor=000000"/></a></td>
+    </tr>
+  </table>
+</div>
+
+<table align="center">
+  <tr>
+    <td>
+      <a href="https://github.com/DARKZONE-MD/DARKZONE-MD" target="_blank">
+        <img alt="View Workflow Codes" src="https://img.shields.io/badge/View-Workflow%20Codes-FF0076?style=for-the-badge&logo=gitlab&logoColor=white"/>
+      </a>
+    </td>
+  </tr>
+</table>  
+
+<table align="center">
+  <tr>
+    <td>
+      <a href="https://github.com/DARKZONE-MD/DARKZONE-MD" target="_blank">
+        <img alt="Deploy From New Repo" src="https://img.shields.io/badge/Deploy-New%20Version-4CAF50?style=for-the-badge&logo=vercel&logoColor=white"/>
+      </a>
+    </td>
+  </tr>
+</table>  
 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FDARKZONE-MD%2FDARKZONE-MD)
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+<table align="center">
+  <tr>
+    <td>
+      <a href="https://github.com/DARKZONE-MD/DARKZONE-MD/archive/refs/heads/main.zip" target="_blank">
+        <img alt="Panel Zip File" src="https://img.shields.io/badge/View-panel%20Codes-FF0000?style=for-the-badge&logo=bot&logoColor=white"/>
+      </a>
+    </td>
+  </tr>
+</table>  
 
-### <h4 align="">3. KOYEB</h4>
-<p style="text-align: center; font-size: 1.2em;">
+<hr>
+<p align="center"><i>✨ Keep your bot updated regularly to enjoy the latest features and patches.</i></p>
 
-<p align="">
-<a href='https://app.koyeb.com/services/deploy?type=git&repository=itx-alii-raza/ALI-MD&ports=3000&env[PREFIX]=.&env[SESSION_ID]=&env[ALWAYS_ONLINE]=false&env[MODE]=public&env[AUTO_STATUS_MSG]=Seen%20status%20by%20ALI-MD&env[AUTO_STATUS_REPLY]=false&env[AUTO_STATUS_SEEN]=true&env[AUTO_TYPING]=false&env[ANTI_LINK]=true&env[AUTO_REACT]=false&env[READ_MESSAGE]=false' target="_blank"><img alt='Heroku' src='https://img.shields.io/badge/-koyeb ‎ deploy-FF009D?style=for-the-badge&logo=koyeb&logoColor=white'/< width=150 height=28/p></a>
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+---
 
-### <h4 align="">2. TALKDROVE FREE</h4>
-<p style="text-align: center; font-size: 1.2em;">
-  
-<p align="">
-<a href='https://talkdrove.com/share-bot/11' target="_blank"><img alt='Heroku' src='https://img.shields.io/badge/-TalkDrove ‎Deploy-6971FF?style=for-the-badge&logo=Github&logoColor=white'/< width=150 height=28/p></a>
-  <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+## ✨ DARKZONE-MD Features
 
-### <h4 align="">4. RAILWAY</h4>
-<p style="text-align: center; font-size: 1.2em;">
+- 🤖 WhatsApp Multi-Device Support
+- 🔁 Anti-Delete (Text + Media)
+- 🎵 YouTube Audio Downloader
+- 📥 Media Downloader (Instagram, TikTok, etc.)
+- 🧠 AI Chatbot
+- 💬 Group Moderation Commands
+- 📛 Auto Sticker Response
+- 🎮 Word Relay & Game Plugins
+- 👮 Admin Tools (Ban, Kick, Promote)
+- 🌐 Web-based Pairing Interface
+- 📤 Sticker Maker (Image to Sticker)
 
-<p align="">
-<a href='https://railway.app/new' target="_blank"><img alt='Heroku' src='https://img.shields.io/badge/-railway deploy-FF8700?style=for-the-badge&logo=railway&logoColor=white'/< width=150 height=28/p></a>
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
-
-### <h4 align="">5. RENDER</h4>
-<p style="text-align: center; font-size: 1.2em;">
-  
-<p align="">
-<a href='https://render.com/deploy?repo=https://github.com/itx-alii-raza/ALI-MD.git' target="_blank"><img alt='Heroku' src='https://img.shields.io/badge/-Render deploy-black?style=for-the-badge&logo=render&logoColot=white'/< width=150 height=28/p></a>
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
-
-### <h4 align="">6. HUGGING FACE</h4>
-<p style="text-align: center; font-size: 1.2em;">
-  
-<p align="">
-<a href='https://app.netlify.com/' target="_blank"><img alt='Netlify' src='https://img.shields.io/badge/-Netlify Deploy-CC00FF?style=for-the-badge&logo=huggingface&logoColor=white'/< width=150 height=28/p></a> </a>
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
-<details>
-  
-<b><strong><summary align="" style="color: Yello;">EASIEST METHOD 2</summary></strong></b>
-<p style="text-align: center; font-size: 1.2em;">
- 
-
-## <h3 align=""> HOW TO DEPLOY ON HUGGING FACE</h3>
-<h6 align-"center">
-*❄️ Deploy ali-md On Hugging Face For Free !*
-
-`Specs :`
-- v2 CPU
-- 16GB RAM
-
-> `Steps to deploy`
-
-`Step 1`
-1. Go to hugginface.co/join and create an account and verify your email too.
-
-`Step 2`
-1. Go to https://huggingface.co/spaces/itx-alii-raza/ALI-MD
-
-2. Tap on *three dots* _(as shown in image)_
-
-3. Tap on *duplicate space* _(as shown in image)_
-
-`Step 3`
-1. Fill your details, e.g., Session ID, Bot Name, owner number etc...
-
-2. Tap on *duplicate space shown below*
-
-```After that wait 10 seconds & your have deployed it successfuly  for free 24/7```
-
-> CREDITS PIKABOTZ🎐
-
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍʀ ꜰʀᴀɴᴋ ᴏꜰᴄ*</h6>
-
-</details>
-
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
-
-
-### <h4 align="">7. REPLIT</h4>
-<p style="text-align: center; font-size: 1.2em;">
-
-<p align="">
-<a href='https://replit.com/~' target="_blank"><img alt='Replit' src='https://img.shields.io/badge/-Replit Deploy-1976D2?style=for-the-badge&logo=replit&logoColor=white'/< width=150 height=28/p></a> </a>
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
-
+---
 
 ## 👑 PROJECT OWNER 
 HII DEARS FRIENDS IF YOU WANT ANY HELP SO YOU CAN CONTACT↘︎ WITH ME WIA WHATSAPP ITS ME ERFAN AHMAD࿐➺
