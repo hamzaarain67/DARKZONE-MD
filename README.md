@@ -146,23 +146,29 @@
 
 ---
 ***
-
-
 ## ⚠️ IMPORTANT NOTICE
 
 <div align="center">
 
-```diff
-- WARNING: This is NOT an official WhatsApp product
-- Using third-party bots may violate WhatsApp's Terms of Service
-- Use at your own risk - Account bans are possible.
+### 🚨 DISCLAIMER
+
+<span style="color:#3498DB;font-weight:bold">• NOT an official WhatsApp product</span>  
+<span style="color:#3498DB">• May violate WhatsApp's Terms of Service</span>  
+<span style="color:#3498DB">• Use at your own risk - Bans possible</span>  
+<span style="color:#3498DB">• Not affiliated with Meta/WhatsApp Inc.</span>
 
 ---
+
+### 📜 USAGE WARNINGS
+<span style="color:#2980b9">🚫 Not for commercial use</span>  
+<span style="color:#2980b9">🔒 Unauthorized copying prohibited</span>  
+<span style="color:#2980b9">⚖️ Owner not responsible for misuse</span>
+
 ---
 
-<div align="center" style="margin-top:20px">
-Project Maintainer
-https://readme-typing-svg.demolab.com?font=Roboto&size=20&weight=500&pause=1000&color=3498DB&center=true&vCenter=true&width=400&lines=Erfan+Ahmad;Contact:+923306137477
+### 👨💻 PROJECT MAINTAINER
+<span style="color:#3498DB;font-size:18px">Erfan Ahmad</span>  
+<span style="color:#3498DB">Contact: +92 330 6137477</span>
 
 </div>
- ```
+
