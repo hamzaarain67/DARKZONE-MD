@@ -1,15 +1,15 @@
-‎<div align="center">
+<div align="center">
 
-<!-- Animated Typing Text with Gradient Colors -->
-[![Typing Animation](https://readme-typing-svg.demolab.com?font=Montserrat+Alternates&size=32&weight=700&duration=3500&pause=500&color=FF69B4&background=FF69B400&center=true&vCenter=true&width=680&height=80&lines=✨+ASSALAMUALAIKUM!+WELCOME+TO+DARKZONE-MD;🔥+ULTIMATE+WHATSAPP+BOT+WITH+100%2B+FEATURES;⚡+FASTEST+•+MOST+ADVANCED+•+USER+FRIENDLY)](https://git.io/typing-svg)
+<!-- Glowing Animated Header -->
+[![Typing Animation](https://readme-typing-svg.demolab.com?font=Righteous&size=36&weight=800&duration=3000&pause=800&color=F8D866&background=8B00FF30&center=true&vCenter=true&width=700&height=100&lines=✨+ASSALAMUALAIKUM!+WELCOME+TO+DARKZONE-MD;🌟+ULTRA-ADVANCED+WHATSAPP+BOT+WITH+150%2B+FEATURES;🚀+LIGHTNING+FAST+•+AI-POWERED+•+EASY+TO+USE)](https://git.io/typing-svg)
 
 <!-- Animated Sparkle Divider -->
-<img src="https://github.com/SP-XD/SP-XD/blob/main/images/dino_rounded.gif?raw=true" width="400"/>
+<img src="https://i.giphy.com/media/XcQ0XH32ya0Gs3QNwk/giphy.webp" width="450" alt="sparkle-divider">
 
-<!-- Call-to-Action with Glow Effect -->
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=2000&pause=1000&color=58A6FF&background=FFFFFF00&center=true&vCenter=true&width=500&height=30&lines=DONT+FORGET+TO+FORK+%F0%9F%8D%B4+%26+STAR+%F0%9F%8C%9F+REPO!" alt="CTA">
-</p>
+<!-- Glowing CTA Button -->
+<a href="https://github.com/DARKZONE-MD/DARKZONE-MD">
+  <img src="https://readme-typing-svg.demolab.com?font=Comfortaa&size=20&duration=2500&pause=1000&color=FF9D00&background=FFFFFF00&center=true&vCenter=true&width=500&repeat=true&lines=%F0%9F%94%A5+FORK+%F0%9F%8D%B4+%26+STAR+%F0%9F%8C%9F+TO+SUPPORT+%F0%9F%94%A5" alt="CTA">
+</a>
 
 </div>
 ```
