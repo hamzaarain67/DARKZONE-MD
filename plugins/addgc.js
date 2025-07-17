@@ -1,107 +1,69 @@
 const { cmd } = require('../command');
 const config = require('../config');
 const axios = require('axios');
-const { google } = require('googleapis');
 
-// Google OAuth2 Setup (for Blogger API)
-const blogger = google.blogger({
-  version: 'v3',
-  auth: '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' // Your client secret
-});
-
-const BLOG_ID = 'https://erfan-tech.blogspot.com'; // Replace with your Blogger Blog ID
-const BOT_OWNER = 'ERFAN AHMAD'; // Your name
-const BOT_NUMBER = '923306137477'; // Your number
+// Google Sheets Setup (Easier than Blogger API)
+const SHEET_ID = 'YOUR_GOOGLE_SHEET_ID'; // Replace this
+const SHEET_NAME = 'Groups';
+const API_KEY = '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'; // Your existing key
 
 cmd({
     pattern: "gc",
-    alias: ["groups", "listgc"],
-    desc: "Show all groups from website",
+    desc: "List all WhatsApp groups",
     category: "website",
     react: "📌",
     filename: __filename
-}, async (conn, mek, m, { from, sender, reply }) => {
+}, async (Void, citel, text) => {
     try {
-        // Fetch posts from Blogger (assuming each post is a group entry)
-        const res = await blogger.posts.list({
-            blogId: BLOG_ID,
-            fetchBodies: true,
-            fetchImages: false
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
+        const response = await axios.get(url);
+        const groups = response.data.values.slice(1); // Skip header row
+
+        if (!groups.length) return citel.reply("❌ No groups found!");
+
+        let message = `╭──「 📍 *GROUP LIST* 📍 」──╮\n│\n│ *Bot Owner:* ERFAN AHMAD\n│ *Contact:* +923306137477\n│\n`;
+        
+        groups.forEach((group, i) => {
+            message += `│ *${i+1}. ${group[0]}*\n│ 🏷️ ${group[2]}\n│ 👤 ${group[3]}\n│ 🔗 ${group[1]}\n│\n`;
         });
 
-        if (!res.data.items || res.data.items.length === 0) {
-            return await reply("❌ No groups found on the website yet!");
-        }
-
-        // Format groups data
-        let message = `╭───「 📌 *GROUP LIST* 📌 」───\n│\n│ *Bot Owner:* ${BOT_OWNER}\n│ *Contact:* ${BOT_NUMBER}\n│\n`;
-
-        res.data.items.forEach((post, index) => {
-            const groupData = post.content.split('\n').reduce((acc, line) => {
-                const [key, value] = line.split(': ');
-                if (key && value) acc[key] = value;
-                return acc;
-            }, {});
-
-            message += `│ *${index + 1}. ${post.title}*\n`;
-            message += `│ 🏷️ Category: ${groupData.Category || 'General'}\n`;
-            message += `│ 👥 Admin: ${groupData.Admin || 'Not specified'}\n`;
-            message += `│ 🔗 Link: ${groupData.Link || 'No link'}\n│\n`;
-        });
-
-        message += `╰─────────────────────\n\nUse *${config.PREFIX}addgc* to add your group!`;
-
-        await reply(message);
+        message += `╰───────────────────╯\n\n_Use *${config.PREFIX}addgc* to add your group_`;
+        return Void.sendMessage(citel.chat, { text: message });
 
     } catch (e) {
-        console.error("GC Error:", e);
-        await reply("❌ Error fetching groups. Please try again later.");
+        console.error(e);
+        return citel.reply("❌ Error fetching groups. Try again later.");
     }
 });
 
 cmd({
     pattern: "addgc",
-    alias: ["addgroup"],
-    desc: "Add a group to website",
+    desc: "Add new WhatsApp group",
     category: "website",
     react: "➕",
-    filename: __filename,
-    usage: `${config.PREFIX}addgc group_name, group_link, category, admin_number`
-}, async (conn, mek, m, { from, sender, reply, args }) => {
+    usage: `${config.PREFIX}addgc Name,Link,Category,AdminNumber`
+}, async (Void, citel, text) => {
     try {
-        const [name, link, category, admin] = args.join(' ').split(',').map(i => i.trim());
+        const [name, link, category, admin] = text.split(',').map(i => i.trim());
         
-        if (!name || !link || !category || !admin) {
-            return await reply(`❌ Invalid format! Use:\n${config.PREFIX}addgc Name, Link, Category, AdminNumber`);
-        }
+        if (!link.includes('chat.whatsapp.com')) 
+            return citel.reply("❌ Invalid WhatsApp link!");
 
-        if (!link.includes('chat.whatsapp.com')) {
-            return await reply("❌ Invalid WhatsApp link! Must contain 'chat.whatsapp.com'");
-        }
+        const payload = {
+            range: `${SHEET_NAME}!A2:D2`,
+            values: [[name, link, category, admin]],
+        };
 
-        // Create post content structure
-        const content = [
-            `Category: ${category}`,
-            `Admin: ${admin}`,
-            `Link: ${link}`,
-            `AddedBy: ${sender.split('@')[0]}`,
-            `Date: ${new Date().toLocaleString()}`
-        ].join('\n');
+        await axios.post(
+            `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/append?valueInputOption=RAW&key=${API_KEY}`,
+            payload,
+            { headers: { 'Content-Type': 'application/json' } }
+        );
 
-        // Create new Blogger post (group entry)
-        await blogger.posts.insert({
-            blogId: BLOG_ID,
-            requestBody: {
-                title: name,
-                content: content,
-                labels: [category, 'whatsapp-group']
-            }
-        });
-
-        await reply(`✅ *${name}* added successfully under *${category}*!`);
+        return citel.reply(`✅ *${name}* added successfully!`);
 
     } catch (e) {
-        console.error("AddGC Error:", e);
-        await reply("❌ Failed to add group. Is the API configured properly?");
+        console.error(e);
+        return citel.reply("❌ Failed to add group. Check format: .addgc Name,Link,Category,Admin");
     }
 });
