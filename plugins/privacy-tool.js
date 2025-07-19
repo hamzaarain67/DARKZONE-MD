@@ -97,18 +97,33 @@ async (conn, mek, m, { from, isOwner, reply }) => {
 
 cmd({
     pattern: "getbio",
-    desc: "Displays the user's bio.",
+    desc: "Displays the mentioned/replied user's bio",
     category: "privacy",
-    filename: __filename,
-}, async (conn, mek, m, { args, reply }) => {
+    filename: __filename
+}, async (Void, citel, text) => {
     try {
-        const jid = args[0] || mek.key.remoteJid;
-        const about = await conn.fetchStatus?.(jid);
-        if (!about) return reply("No bio found.");
-        return reply(`User Bio:\n\n${about.status}`);
+        // Get target user (replied or mentioned or sender)
+        const target = citel.quoted ? citel.quoted.sender : 
+                     citel.mentionedJid && citel.mentionedJid[0] ? citel.mentionedJid[0] : 
+                     citel.sender;
+
+        if (!target) return citel.reply("Please mention a user or reply to their message");
+
+        // Fetch user's bio
+        const bio = await Void.fetchStatus(target).catch(() => null);
+        
+        if (!bio || !bio.status) {
+            return citel.reply("This user hasn't set a bio or it's private.");
+        }
+
+        // Send the bio
+        await citel.reply(`📝 *User Bio*:\n\n${bio.status}\n\n🆔: @${target.split('@')[0]}`, {
+            mentions: [target]
+        });
+
     } catch (error) {
-        console.error("Error in bio command:", error);
-        reply("No bio found.");
+        console.error("[BIO ERROR]", error);
+        citel.reply("Failed to fetch bio. The user might have privacy settings enabled.");
     }
 });
 cmd({
