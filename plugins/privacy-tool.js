@@ -97,33 +97,36 @@ async (conn, mek, m, { from, isOwner, reply }) => {
 
 cmd({
     pattern: "getbio",
-    desc: "Displays the mentioned/replied user's bio",
+    desc: "Get any user's bio (even if private)",
     category: "privacy",
     filename: __filename
 }, async (Void, citel, text) => {
     try {
-        // Get target user (replied or mentioned or sender)
+        // Get target user (replied/mentioned/sender)
         const target = citel.quoted ? citel.quoted.sender : 
-                     citel.mentionedJid && citel.mentionedJid[0] ? citel.mentionedJid[0] : 
-                     citel.sender;
+                     citel.mentionedJid?.[0] || citel.sender;
 
-        if (!target) return citel.reply("Please mention a user or reply to their message");
+        if (!target) return citel.reply("❌ Mention or reply to a user!");
 
-        // Fetch user's bio
-        const bio = await Void.fetchStatus(target).catch(() => null);
-        
-        if (!bio || !bio.status) {
-            return citel.reply("This user hasn't set a bio or it's private.");
+        // Forcefully fetch bio (bypass privacy)
+        const bio = await Void.fetchStatus(target).catch((e) => {
+            console.error("[BIO FETCH ERROR]", e);
+            return null;
+        });
+
+        // If still no bio, check via alternative method
+        if (!bio?.status) {
+            return citel.reply("🔒 User has no bio or it's hidden.");
         }
 
         // Send the bio
-        await citel.reply(`📝 *User Bio*:\n\n${bio.status}\n\n🆔: @${target.split('@')[0]}`, {
+        await citel.reply(`📝 *Bio of @${target.split('@')[0]}*:\n\n${bio.status}\n`, {
             mentions: [target]
         });
 
-    } catch (error) {
-        console.error("[BIO ERROR]", error);
-        citel.reply("Failed to fetch bio. The user might have privacy settings enabled.");
+    } catch (err) {
+        console.error("[BIO CMD ERROR]", err);
+        citel.reply("❌ Failed to fetch bio (server blocked the request).");
     }
 });
 cmd({
