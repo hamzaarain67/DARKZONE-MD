@@ -298,36 +298,34 @@ async (conn, mek, m, { from, l, quoted, body, isCmd, command, args, q, isGroup, 
 });
 cmd({
     pattern: "getpp",
-    desc: "Fetch the profile picture of a tagged or replied user.",
+    desc: "Get profile picture of mentioned/replied user",
     category: "owner",
     filename: __filename
-}, async (conn, mek, m, { quoted, isGroup, sender, participants, reply }) => {
+}, async (Void, citel, text, { isCreator, isGroup }) => {
     try {
-        // Determine the target user
-        let targetJid = quoted ? quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : sender;
-
-        if (!targetJid) return reply("⚠️ Please reply to a message or mention a user to fetch their profile picture.");
-
-        // Fetch the user's profile picture URL with retries
-        let userPicUrl;
+        // Get the target user (replied or mentioned)
+        let target = citel.quoted ? citel.quoted.sender : citel.mentionedJid ? citel.mentionedJid[0] : citel.sender;
+        
+        if (!target) return citel.reply("Please mention a user or reply to their message");
+        
+        // Fetch profile picture with error handling
+        let ppUrl;
         try {
-            userPicUrl = await conn.profilePictureUrl(targetJid, "image");
-        } catch (e) {
-            console.log("First attempt failed, trying again...");
-            userPicUrl = await conn.profilePictureUrl(targetJid, "image");
+            ppUrl = await Void.profilePictureUrl(target, "image");
+        } catch {
+            return citel.reply("Couldn't fetch profile picture. The user might have no profile photo or it's private.");
         }
-
-        if (!userPicUrl) return reply("⚠️ No profile picture found for the specified user or it may be private.");
-
-        // Send the user's profile picture
-        await conn.sendMessage(m.chat, {
-            image: { url: userPicUrl },
-            caption: "🖼️ Here is the profile picture of the specified user."
-        }, { quoted: m });
-
-    } catch (e) {
-        console.error("Error fetching user profile picture:", e);
-        reply("❌ Unable to fetch profile picture. The user may have set it to private or there might be connection issues.");
+        
+        // Send the image
+        await Void.sendMessage(citel.chat, {
+            image: { url: ppUrl },
+            caption: `Profile picture of @${target.split('@')[0]}`,
+            mentions: [target]
+        }, { quoted: citel });
+        
+    } catch (error) {
+        console.error("[PP ERROR]", error);
+        citel.reply("An error occurred while fetching the profile picture");
     }
 });
           
