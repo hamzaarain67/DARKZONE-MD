@@ -3,42 +3,41 @@ const { cmd } = require('../command');
 cmd({
     pattern: "remove",
     alias: ["kick", "k"],
-    desc: "Removes a member from the group",
+    desc: "Remove any member (even admins) from the group",
     category: "admin",
     react: "❌",
     filename: __filename
 },
-async (conn, mek, m, {
-    from, q, isGroup, isBotAdmins, reply, quoted, senderNumber
-}) => {
-    // Check if the command is used in a group
-    if (!isGroup) return reply("❌ This command can only be used in groups.");
-
-    // Get the bot owner's number dynamically from conn.user.id
-    const botOwner = conn.user.id.split(":")[0];
-    if (senderNumber !== botOwner) {
-        return reply("❌ Only the bot owner can use this command.");
-    }
-
-    // Check if the bot is an admin
-    if (!isBotAdmins) return reply("❌ I need to be an admin to use this command.");
-
-    let number;
-    if (m.quoted) {
-        number = m.quoted.sender.split("@")[0]; // If replying to a message, get the sender's number
-    } else if (q && q.includes("@")) {
-        number = q.replace(/[@\s]/g, ''); // If mentioning a user
-    } else {
-        return reply("❌ Please reply to a message or mention a user to remove.");
-    }
-
-    const jid = number + "@s.whatsapp.net";
-
+async (Void, citel, text, { isGroup, isBotAdmin, isAdmin, participants }) => {
     try {
-        await conn.groupParticipantsUpdate(from, [jid], "remove");
-        reply(`✅ Successfully removed @${number}`, { mentions: [jid] });
+        // Check if used in a group
+        if (!isGroup) return citel.reply("❌ This command only works in groups!");
+
+        // Check if bot is admin
+        if (!isBotAdmin) return citel.reply("❌ I need admin rights to remove members!");
+
+        // Check if user is admin
+        if (!isAdmin) return citel.reply("❌ Only admins can use this command!");
+
+        // Get target user (quoted/mentioned)
+        let target = citel.quoted ? citel.quoted.sender : 
+                   citel.mentionedJid?.[0] || null;
+
+        if (!target) return citel.reply("❌ Reply to a message or mention a user!");
+
+        // Prevent self-kick
+        if (target === citel.sender) return citel.reply("❌ You can't remove yourself!");
+
+        // Kick the user
+        await Void.groupParticipantsUpdate(citel.chat, [target], "remove");
+
+        // Success message with mention
+        await citel.reply(`🚫 @${target.split('@')[0]} has been removed from the group!`, {
+            mentions: [target]
+        });
+
     } catch (error) {
-        console.error("Remove command error:", error);
-        reply("❌ Failed to remove the member.");
+        console.error("[KICK ERROR]", error);
+        citel.reply("❌ Failed to remove user. Maybe they're a higher admin?");
     }
 });
