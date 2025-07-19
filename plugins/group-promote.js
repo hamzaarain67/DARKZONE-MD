@@ -8,31 +8,34 @@ cmd({
     react: "⬆️",
     filename: __filename
 },
-async (Void, citel, text, { isGroup, isAdmin, isBotAdmin }) => {
+async (Void, citel, text) => {
     try {
-        // Check if used in group
-        if (!isGroup) return citel.reply("❌ This command only works in groups!");
+        if (!citel.isGroup) return citel.reply("❌ This command only works in groups!");
+        
+        // Check if sender is admin
+        const groupAdmins = await Void.groupMetadata(citel.chat).then(m => m.participants.filter(p => p.admin).map(p => p.id));
+        if (!groupAdmins.includes(citel.sender)) return citel.reply("❌ Only admins can promote members!");
 
-        // Check if user is admin
-        if (!isAdmin) return citel.reply("❌ Only admins can promote members!");
-
-        // Check if bot is admin
-        if (!isBotAdmin) return citel.reply("❌ I need admin rights to promote!");
-
-        // Get target user (quoted/mentioned)
-        const target = citel.quoted?.sender || citel.mentionedJid?.[0];
-        if (!target) return citel.reply("❌ Reply to a message or mention a user!");
+        // Get target user
+        let target;
+        if (citel.quoted) {
+            target = citel.quoted.sender;
+        } else if (citel.mentionedJid && citel.mentionedJid[0]) {
+            target = citel.mentionedJid[0];
+        } else {
+            return citel.reply("❌ Please reply to a message or mention a user!");
+        }
 
         // Promote the user
         await Void.groupParticipantsUpdate(citel.chat, [target], "promote");
-
-        // Success message
-        await citel.reply(`⬆️ @${target.split('@')[0]} has been promoted to admin!`, {
-            mentions: [target]
+        
+        // Success message with mention
+        return citel.reply(`✅ @${target.split('@')[0]} has been promoted to admin!`, { 
+            mentions: [target] 
         });
 
     } catch (error) {
-        console.error("[PROMOTE ERROR]", error);
-        citel.reply("❌ Failed to promote. Maybe user is already admin?");
+        console.error("Promote Error:", error);
+        return citel.reply("❌ Failed to promote user. Please try again.");
     }
 });
