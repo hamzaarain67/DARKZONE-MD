@@ -1,10 +1,13 @@
 const { cmd } = require("../command");
+const fs = require("fs");
+const { tmpdir } = require("os");
+const path = require("path");
 
 cmd({
   pattern: "post",
   alias: ["poststatus", "status", "story", "repost", "reshare"],
-  react: '📝',
-  desc: "Posts replied media to bot's status",
+  react: "📝",
+  desc: "Posts replied media to bot's WhatsApp status",
   category: "utility",
   filename: __filename
 }, async (client, message, match, { from, isCreator }) => {
@@ -15,59 +18,39 @@ cmd({
       }, { quoted: message });
     }
 
-    const quotedMsg = message.quoted ? message.quoted : message;
+    const quotedMsg = message.quoted || message;
+    const mediaTypes = ["image", "video", "audio"];
+
+    // Check if the message has media
+    const hasMedia = mediaTypes.some(type => quotedMsg[`${type}Message`] || quotedMsg.msg?.[`${type}Message`]);
     
-    // Improved media detection
-    const isImage = quotedMsg.imageMessage || quotedMsg.msg?.imageMessage;
-    const isVideo = quotedMsg.videoMessage || quotedMsg.msg?.videoMessage;
-    const isAudio = quotedMsg.audioMessage || quotedMsg.msg?.audioMessage;
-    
-    if (!isImage && !isVideo && !isAudio) {
+    if (!hasMedia) {
       return await client.sendMessage(message.chat, {
-        text: "*Please reply to an image, video, or audio file.*"
+        text: "*❗ Please reply to an image, video, or audio file.*"
       }, { quoted: message });
     }
 
+    // Download the media
     const buffer = await quotedMsg.download();
-    const caption = quotedMsg.text || quotedMsg.caption || '';
+    const tempFilePath = path.join(tmpdir(), `status_${Date.now()}.${quotedMsg.type === "audio" ? "mp3" : quotedMsg.type === "video" ? "mp4" : "jpg"}`);
+    fs.writeFileSync(tempFilePath, buffer);
 
-    let statusContent = {
-      caption: caption
-    };
+    const caption = quotedMsg.text || quotedMsg.caption || "";
 
-    if (isImage) {
-      statusContent.image = buffer;
-    } 
-    else if (isVideo) {
-      statusContent.video = buffer;
-    }
-    else if (isAudio) {
-      statusContent.audio = buffer;
-      statusContent.mimetype = "audio/mp4";
-      statusContent.ptt = quotedMsg.ptt || false;
-    }
+    // Upload to WhatsApp status
+    await client.setStatus(caption, tempFilePath);
 
-    // Try alternative status posting methods
-    try {
-      await client.sendMessage("status@broadcast", statusContent);
-      
-      // Alternative method if above fails
-      if (!client.sendMessage("status@broadcast", statusContent)) {
-        await client.setStatus(caption, buffer);
-      }
-    } catch (statusError) {
-      console.error("Status Upload Error:", statusError);
-      throw new Error("Failed to post to status. WhatsApp may have changed their API.");
-    }
+    // Delete the temporary file
+    fs.unlinkSync(tempFilePath);
 
     await client.sendMessage(message.chat, {
-      text: "✅ Status Uploaded Successfully."
+      text: "✅ *Status uploaded successfully!*"
     }, { quoted: message });
 
   } catch (error) {
     console.error("Status Error:", error);
     await client.sendMessage(message.chat, {
-      text: "❌ Failed to post status:\n" + (error.message || "Unknown error occurred")
+      text: `❌ *Failed to post status:*\n${error.message || "Unknown error"}`
     }, { quoted: message });
   }
 });
