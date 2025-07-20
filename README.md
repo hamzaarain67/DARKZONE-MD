@@ -36,7 +36,7 @@
   
 --- 
 
-<a center="https://ibb.co/GvT68BsK"><img src="https://i.ibb.co/MD6vtW8Y/glow.png" alt="glow" border="0"></a>
+<a center="https://ibb.co/GvT68BsK"><img src="https://files.catbox.moe/4964gx.jpg" alt="glow" border="0"></a>
 ***
 
 
