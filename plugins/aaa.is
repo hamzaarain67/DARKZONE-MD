@@ -1,82 +1,68 @@
 const axios = require('axios');
 const { cmd } = require('../command');
-const fs = require('fs');
-const stream = require('stream');
 
 cmd({
-    pattern: "movie1",
-    desc: "Download and send movies via WhatsApp",
+    pattern: "movi",
+    desc: "Search for movies using RapidAPI",
     category: "utility",
-    react: "⬇️",
+    react: "🎬",
     filename: __filename
 },
 async (conn, mek, m, { from, reply, args }) => {
     try {
-        const query = args.join(' ') || m.text?.replace(/^\.?movie\s?/i, '').trim();
-        if (!query) return reply("🔍 Please provide a movie name!\nExample: .movie Spider-Man 2021");
+        const query = args.join(' ').trim();
+        if (!query) return reply("🎬 Please provide a movie name\nExample: .movie The Matrix");
 
-        await conn.sendPresenceUpdate('composing', from);
-
-        // API Configuration
-        const apiConfig = {
+        const options = {
             method: 'GET',
             url: 'https://movie-database-api1.p.rapidapi.com/list_movies.json',
             params: {
                 query_term: query,
-                limit: 1,
-                sort_by: 'download_count'
+                limit: 1, // Get only the most relevant result
+                sort_by: 'rating',
+                order_by: 'desc'
             },
             headers: {
                 'x-rapidapi-host': 'movie-database-api1.p.rapidapi.com',
                 'x-rapidapi-key': '8f8214432dmshe2d6730ba6b5541p119a35jsna12406472100'
-            },
-            timeout: 15000
+            }
         };
 
-        const apiResponse = await axios(apiConfig);
+        const response = await axios.request(options);
+        const data = response.data;
         
-        if (!apiResponse.data?.data?.movies?.length) {
-            return reply("❌ No movie found - Try different keywords");
+        if (!data.data || !data.data.movies || data.data.movies.length === 0) {
+            return reply("❌ No movies found with that name");
         }
 
-        const movie = apiResponse.data.data.movies[0];
-        const bestTorrent = movie.torrents.sort((a,b) => 
-            parseInt(b.seeds) - parseInt(a.seeds))[0];
+        const movie = data.data.movies[0];
+        
+        // Format the movie information
+        let caption = `🎬 *${movie.title}* (${movie.year})\n\n`;
+        caption += `⭐ *Rating:* ${movie.rating}/10\n`;
+        caption += `⏳ *Duration:* ${movie.runtime} minutes\n`;
+        caption += `🎭 *Genres:* ${movie.genres.join(', ')}\n\n`;
+        caption += `📝 *Summary:* ${movie.synopsis || 'Not available'}\n\n`;
+        caption += `📥 *Download:* ${movie.torrents ? Object.entries(movie.torrents).map(([quality, torrent]) => 
+            `\n🔗 ${quality}: [${torrent.size}](${torrent.url})`).join('') : 'No torrents available'}`;
 
-        // Download torrent file
-        const torrentData = await axios.get(bestTorrent.url, {
-            responseType: 'arraybuffer',
-            timeout: 30000
-        });
-
-        // Create readable stream
-        const bufferStream = new stream.PassThrough();
-        bufferStream.end(Buffer.from(torrentData.data));
-
-        // Prepare document message
-        await conn.sendMessage(from, {
-            document: {
-                stream: bufferStream,
-                filename: `${movie.title.replace(/[^\w]/g, '_')}_${bestTorrent.quality}.torrent`
-            },
-            caption: `🎥 *${movie.title}* (${movie.year})\n` +
-                     `📥 ${bestTorrent.quality} | ${bestTorrent.size}\n` +
-                     `👤 Seeds: ${bestTorrent.seeds} | Peers: ${bestTorrent.peers}\n` +
-                     `💾 Total Downloads: ${movie.download_count.toLocaleString()}`,
-            mimetype: 'application/x-bittorrent',
-            contextInfo: {
-                externalAdReply: {
-                    title: "Movie Download Bot",
-                    body: "Click to get more movies!",
-                    mediaType: 2,
-                    thumbnail: fs.readFileSync('./assets/thumbnail.jpg'),
-                    sourceUrl: "https://example.com"
+        // Send the response
+        await conn.sendMessage(
+            from,
+            {
+                image: { url: movie.medium_cover_image },
+                caption: caption,
+                contextInfo: {
+                    mentionedJid: [m.sender],
+                    forwardingScore: 999,
+                    isForwarded: true
                 }
-            }
-        }, { quoted: mek });
+            },
+            { quoted: mek }
+        );
 
     } catch (error) {
-        console.error('Main Error:', error);
-        reply(`⚠️ Error: ${error.response?.data?.message || error.message}`);
+        console.error('Movie command error:', error);
+        reply(`❌ Error: ${error.response?.data?.message || error.message}`);
     }
 });
