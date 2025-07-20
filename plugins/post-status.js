@@ -1,56 +1,46 @@
 const { cmd } = require("../command");
-const fs = require("fs");
-const { tmpdir } = require("os");
-const path = require("path");
 
 cmd({
   pattern: "post",
-  alias: ["poststatus", "status", "story", "repost", "reshare"],
-  react: "📝",
-  desc: "Posts replied media to bot's WhatsApp status",
+  alias: ["status", "story"],
+  desc: "Post media to WhatsApp status",
   category: "utility",
   filename: __filename
-}, async (client, message, match, { from, isCreator }) => {
-  try {
-    if (!isCreator) {
-      return await client.sendMessage(from, {
-        text: "*📛 This is an owner-only command.*"
-      }, { quoted: message });
+}, async (client, message, match, { isCreator }) => {
+  if (!isCreator) return await message.reply("*📛 Owner only command*");
+
+  const quoted = message.quoted || message;
+  
+  // 1. Handle Text Status
+  if (quoted.text && !quoted.hasMedia) {
+    try {
+      await client.setStatus(quoted.text);
+      return await message.reply("✅ Text status updated");
+    } catch (e) {
+      return await message.reply("❌ Failed to update text status");
     }
-
-    const quotedMsg = message.quoted || message;
-    const mediaTypes = ["image", "video", "audio"];
-
-    // Check if the message has media
-    const hasMedia = mediaTypes.some(type => quotedMsg[`${type}Message`] || quotedMsg.msg?.[`${type}Message`]);
-    
-    if (!hasMedia) {
-      return await client.sendMessage(message.chat, {
-        text: "*❗ Please reply to an image, video, or audio file.*"
-      }, { quoted: message });
-    }
-
-    // Download the media
-    const buffer = await quotedMsg.download();
-    const tempFilePath = path.join(tmpdir(), `status_${Date.now()}.${quotedMsg.type === "audio" ? "mp3" : quotedMsg.type === "video" ? "mp4" : "jpg"}`);
-    fs.writeFileSync(tempFilePath, buffer);
-
-    const caption = quotedMsg.text || quotedMsg.caption || "";
-
-    // Upload to WhatsApp status
-    await client.setStatus(caption, tempFilePath);
-
-    // Delete the temporary file
-    fs.unlinkSync(tempFilePath);
-
-    await client.sendMessage(message.chat, {
-      text: "✅ *Status uploaded successfully!*"
-    }, { quoted: message });
-
-  } catch (error) {
-    console.error("Status Error:", error);
-    await client.sendMessage(message.chat, {
-      text: `❌ *Failed to post status:*\n${error.message || "Unknown error"}`
-    }, { quoted: message });
   }
+
+  // 2. Handle Media Status
+  if (quoted.hasMedia) {
+    try {
+      const media = await quoted.download();
+      const caption = quoted.caption || "";
+
+      // For WhatsApp Business API
+      await client.sendMessage("status@broadcast", { 
+        [quoted.type.replace("Message", "")]: media,
+        caption: caption
+      });
+
+      // Alternative method
+      await client.setProfilePicture(media); // For profile picture as fallback
+      
+      return await message.reply("✅ Media posted to status");
+    } catch (error) {
+      return await message.reply(`❌ Error: ${error.message}`);
+    }
+  }
+
+  return await message.reply("⚠ Please reply to media or text");
 });
