@@ -16,47 +16,49 @@ cmd({
     }
 
     const quotedMsg = message.quoted ? message.quoted : message;
-    const mimeType = (quotedMsg.msg || quotedMsg).mimetype || '';
-
-    if (!mimeType) {
+    
+    // Improved media detection
+    const isImage = quotedMsg.imageMessage || quotedMsg.msg?.imageMessage;
+    const isVideo = quotedMsg.videoMessage || quotedMsg.msg?.videoMessage;
+    const isAudio = quotedMsg.audioMessage || quotedMsg.msg?.audioMessage;
+    
+    if (!isImage && !isVideo && !isAudio) {
       return await client.sendMessage(message.chat, {
         text: "*Please reply to an image, video, or audio file.*"
       }, { quoted: message });
     }
 
     const buffer = await quotedMsg.download();
-    const mtype = quotedMsg.mtype;
-    const caption = quotedMsg.text || '';
+    const caption = quotedMsg.text || quotedMsg.caption || '';
 
-    let statusContent = {};
+    let statusContent = {
+      caption: caption
+    };
 
-    switch (mtype) {
-      case "imageMessage":
-        statusContent = {
-          image: buffer,
-          caption: caption
-        };
-        break;
-      case "videoMessage":
-        statusContent = {
-          video: buffer,
-          caption: caption
-        };
-        break;
-      case "audioMessage":
-        statusContent = {
-          audio: buffer,
-          mimetype: "audio/mp4",
-          ptt: quotedMsg.ptt || false
-        };
-        break;
-      default:
-        return await client.sendMessage(message.chat, {
-          text: "Only image, video, and audio files can be posted to status."
-        }, { quoted: message });
+    if (isImage) {
+      statusContent.image = buffer;
+    } 
+    else if (isVideo) {
+      statusContent.video = buffer;
+    }
+    else if (isAudio) {
+      statusContent.audio = buffer;
+      statusContent.mimetype = "audio/mp4";
+      statusContent.ptt = quotedMsg.ptt || false;
     }
 
-    await client.sendMessage("status@broadcast", statusContent);
+    // Try alternative status posting methods
+    try {
+      await client.sendMessage("status@broadcast", statusContent);
+      
+      // Alternative method if above fails
+      if (!client.sendMessage("status@broadcast", statusContent)) {
+        await client.setStatus(caption, buffer);
+      }
+    } catch (statusError) {
+      console.error("Status Upload Error:", statusError);
+      throw new Error("Failed to post to status. WhatsApp may have changed their API.");
+    }
 
     await client.sendMessage(message.chat, {
       text: "✅ Status Uploaded Successfully."
@@ -65,7 +67,7 @@ cmd({
   } catch (error) {
     console.error("Status Error:", error);
     await client.sendMessage(message.chat, {
-      text: "❌ Failed to post status:\n" + error.message
+      text: "❌ Failed to post status:\n" + (error.message || "Unknown error occurred")
     }, { quoted: message });
   }
 });
