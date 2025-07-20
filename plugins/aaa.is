@@ -1,78 +1,82 @@
 const axios = require('axios');
 const { cmd } = require('../command');
 const fs = require('fs');
-const path = require('path');
+const stream = require('stream');
 
 cmd({
     pattern: "movie1",
-    desc: "Download and send movie files",
+    desc: "Download and send movies via WhatsApp",
     category: "utility",
-    react: "🎥",
+    react: "⬇️",
     filename: __filename
 },
-async (conn, mek, m, { from, reply, sender, args }) => {
+async (conn, mek, m, { from, reply, args }) => {
     try {
-        const movieName = args.join(' ') || m.text.replace(/^[\.\#\$\!]?movie\s?/i, '').trim();
-        
-        if (!movieName) return reply("📝 Please provide a movie name!\nExample: .movie The Matrix");
-        
-        // Show typing indicator
+        const query = args.join(' ') || m.text?.replace(/^\.?movie\s?/i, '').trim();
+        if (!query) return reply("🔍 Please provide a movie name!\nExample: .movie Spider-Man 2021");
+
         await conn.sendPresenceUpdate('composing', from);
 
-        const options = {
+        // API Configuration
+        const apiConfig = {
             method: 'GET',
             url: 'https://movie-database-api1.p.rapidapi.com/list_movies.json',
             params: {
-                query_term: movieName,
-                limit: '1',
+                query_term: query,
+                limit: 1,
                 sort_by: 'download_count'
             },
             headers: {
                 'x-rapidapi-host': 'movie-database-api1.p.rapidapi.com',
                 'x-rapidapi-key': '8f8214432dmshe2d6730ba6b5541p119a35jsna12406472100'
-            }
+            },
+            timeout: 15000
         };
 
-        const response = await axios.request(options);
-        const movieData = response.data.data.movies[0];
+        const apiResponse = await axios(apiConfig);
         
-        if (!movieData) return reply("❗ Movie not found in database");
-        
-        // Get highest quality torrent
-        const torrent = movieData.torrents.reduce((prev, current) => 
-            (parseInt(current.size.slice(0, -2)) > parseInt(prev.size.slice(0, -2))) ? current : prev);
-        
-        const fileName = `${movieData.title.replace(/[^a-z0-9]/gi, '_')}.torrent`;
-        const filePath = path.join(__dirname, '../temp', fileName);
-        
+        if (!apiResponse.data?.data?.movies?.length) {
+            return reply("❌ No movie found - Try different keywords");
+        }
+
+        const movie = apiResponse.data.data.movies[0];
+        const bestTorrent = movie.torrents.sort((a,b) => 
+            parseInt(b.seeds) - parseInt(a.seeds))[0];
+
         // Download torrent file
-        const torrentResponse = await axios.get(torrent.url, { responseType: 'arraybuffer' });
-        fs.writeFileSync(filePath, Buffer.from(torrentResponse.data));
-        
+        const torrentData = await axios.get(bestTorrent.url, {
+            responseType: 'arraybuffer',
+            timeout: 30000
+        });
+
+        // Create readable stream
+        const bufferStream = new stream.PassThrough();
+        bufferStream.end(Buffer.from(torrentData.data));
+
         // Prepare document message
-        const docMessage = {
-            document: { url: `file://${filePath}` },
-            fileName: fileName,
+        await conn.sendMessage(from, {
+            document: {
+                stream: bufferStream,
+                filename: `${movie.title.replace(/[^\w]/g, '_')}_${bestTorrent.quality}.torrent`
+            },
+            caption: `🎥 *${movie.title}* (${movie.year})\n` +
+                     `📥 ${bestTorrent.quality} | ${bestTorrent.size}\n` +
+                     `👤 Seeds: ${bestTorrent.seeds} | Peers: ${bestTorrent.peers}\n` +
+                     `💾 Total Downloads: ${movie.download_count.toLocaleString()}`,
             mimetype: 'application/x-bittorrent',
-            caption: `📽️ *${movieData.title}* (${movieData.year})\n` +
-                     `🎞️ Quality: ${torrent.quality}\n` +
-                     `📦 Size: ${torrent.size}\n` +
-                     `👥 Seeds: ${torrent.seeds}\n` +
-                     `⬇️ Downloads: ${movieData.download_count.toLocaleString()}`,
             contextInfo: {
-                mentionedJid: [sender],
-                forwardingScore: 999,
-                isForwarded: true
+                externalAdReply: {
+                    title: "Movie Download Bot",
+                    body: "Click to get more movies!",
+                    mediaType: 2,
+                    thumbnail: fs.readFileSync('./assets/thumbnail.jpg'),
+                    sourceUrl: "https://example.com"
+                }
             }
-        };
+        }, { quoted: mek });
 
-        await conn.sendMessage(from, docMessage, { quoted: mek });
-        
-        // Cleanup temp file
-        fs.unlinkSync(filePath);
-
-    } catch (e) {
-        console.error('Movie Download Error:', e);
-        reply(`❌ Error: ${e.response?.data?.message || e.message}`);
+    } catch (error) {
+        console.error('Main Error:', error);
+        reply(`⚠️ Error: ${error.response?.data?.message || error.message}`);
     }
 });
